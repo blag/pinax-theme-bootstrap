@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.contrib.sites.models import Site
 
 from pinax_theme_bootstrap.conf import settings
@@ -9,7 +10,7 @@ def theme(request):
         "THEME_CONTACT_EMAIL": settings.THEME_CONTACT_EMAIL,
     }
 
-    if Site._meta.installed:
+    if apps.is_installed("django.contrib.sites"):
         site = Site.objects.get_current(request)
         ctx.update({
             "SITE_NAME": site.name,
